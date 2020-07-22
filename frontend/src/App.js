@@ -5,11 +5,7 @@ import {
 import routes from './routes';
 import './App.css';
 
-import Login from './components/pages/login';
-
 function App() {
-  console.log(`-------- here`)
-  console.log(Login)
   return (
     <div>
       <Router>
