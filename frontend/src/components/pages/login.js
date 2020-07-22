@@ -21,7 +21,7 @@ const Login = (props) => {
     
     let isValidForm = true;
     
-    Object.keys(formControl).map(key => {
+    Object.keys(formControl).forEach(key => {
       isValidForm = isValidForm && formControl[key].valid;
     })
     
