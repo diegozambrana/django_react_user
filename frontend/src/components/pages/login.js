@@ -9,39 +9,36 @@ import {
 } from 'reactstrap';
 import { login_fields } from './fields'
 import { Link } from 'react-router-dom';
-import validate from '../../utils/validate';
+import { validateForm, validateFormField } from '../../utils/validate';
+import loginRequest from '../../actions/auth/login';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const Login = (props) => {
 
   let [formControl, setFormControl] = useState(login_fields);
+  const dispatch = useDispatch();
 
   const onSubmit = (event) => {
     event.preventDefault();
-    
-    let isValidForm = true;
-    
-    Object.keys(formControl).forEach(key => {
-      isValidForm = isValidForm && formControl[key].valid;
-    })
-    
+
+    // check if all fields of form are valid
+    let isValidForm = validateForm(formControl);
+
     if(isValidForm){
       let data = {
         "username": formControl.username.value,
         "password": formControl.password.value
       }
-      // Call Login with data
+      // call API login url.
+      dispatch(loginRequest(data));
     }else{
       // The form is invalid
     }
   }
 
   const onChangeHandler = (value, field) => {
-    let fields = formControl;
-    fields[field].value = value;
-    fields[field].valid = validate(value, fields[field].validationRules);
-    fields[field].invalid = !fields[field].valid
-    setFormControl(fields);
+    setFormControl(validateFormField(formControl, field, value));
   }
 
   return (

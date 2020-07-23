@@ -20,49 +20,38 @@ const validate = (value, rules) => {
   return isValid;
 }
 
-
-/**
-* minLength Val
-* @param  value 
-* @param  minLength
-* @return          
-*/
 const minLengthValidator = (value, minLength) => {
   return value.length >= minLength;
 }
 
-
-/**
-* maxLength Val
-* @param  value 
-* @param  maxLength
-* @return          
-*/
 const maxLengthValidator = (value, maxLength) => {
   return value.length <= maxLength;
 }
 
-/**
-* Check to confirm that feild is required
-* 
-* @param  value 
-* @return       
-*/
 const requiredValidator = value => {
   return value.trim() !== ''; 
 }
 
-/**
-* Email validation
-* 
-* @param value
-* @return 
-*/
 const emailValidator = value => {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(value).toLowerCase());
 }
 
+export const validateForm = (formControl) => {
+  let isValidForm = true;
+  Object.keys(formControl).forEach(key => {
+    isValidForm = isValidForm && formControl[key].valid;
+  })
+  return isValidForm;
+}
+
+export const validateFormField = (formControl, field, value) => {
+  let fields = formControl;
+  fields[field].value = value;
+  fields[field].valid = validate(value, fields[field].validationRules);
+  fields[field].invalid = !fields[field].valid
+  return fields;
+}
 
 
 export default validate;
