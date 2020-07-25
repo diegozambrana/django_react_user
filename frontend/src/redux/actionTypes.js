@@ -1,2 +1,4 @@
-// USER AUTH
-export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const ACTIONS = { 
+  LOGIN_REQUEST: "LOGIN_REQUEST",
+  LOGOUT: "LOGOUT",
+}

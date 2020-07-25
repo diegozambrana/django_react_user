@@ -1,20 +1,26 @@
 import React from 'react';
-import { Switch, Route } from "react-router-dom";
-
+import { Switch } from "react-router-dom";
+import PrivateRoute from './components/generic/routes/privateRoute';
+import PublicRoute from './components/generic/routes/publicRoute';
 import {
   Login,
   Register,
   Reset,
   Forgot,
+  Private,
+  Public,
 } from './components/pages';
 
 export default () => {
   return (
     <Switch>
-      <Route path="/login" component={Login} />
-      <Route path="/forgot" component={Forgot} />
-      <Route path="/register" component={Register} />
-      <Route path="/reset" component={Reset} />
+      <PublicRoute path="/login" component={Login} noAuth/>
+      <PublicRoute path="/forgot" component={Forgot} noAuth/>
+      <PublicRoute path="/register" component={Register} noAuth/>
+      <PublicRoute path="/reset" component={Reset} noAuth/>
+      <PublicRoute path="/public" component={Public} />
+
+      <PrivateRoute path="/private" component={Private} />
     </Switch>
   )
 }

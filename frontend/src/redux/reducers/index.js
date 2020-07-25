@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST } from "../actionTypes";
+import { ACTIONS } from "../actionTypes";
 import Cookies from "js-cookie";
 
 const initialState = {
@@ -10,10 +10,19 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_REQUEST: {
+    case ACTIONS.LOGIN_REQUEST: {
       return {
         ...state,
+        auth_access: action.payload.data.access,
+        auth_refresh: action.payload.data.refresh,
       };
+    }
+    case ACTIONS.LOGOUT: {
+      return {
+        ...state,
+        auth_access: '',
+        auth_refresh: '',
+      }
     }
     default:
       return state;

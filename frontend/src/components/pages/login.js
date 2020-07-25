@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Container,
   Form,
@@ -8,8 +8,8 @@ import {
   Col
 } from 'reactstrap';
 import { login_fields } from './fields'
-import { Link } from 'react-router-dom';
-import { validateForm, validateFormField } from '../../utils/validate';
+import { Link, Redirect } from 'react-router-dom';
+import { validateForm, validateFormField } from '../../utils';
 import loginRequest from '../../actions/auth/login';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -18,6 +18,7 @@ const Login = (props) => {
 
   let [formControl, setFormControl] = useState(login_fields);
   const dispatch = useDispatch();
+  const auth_access = useSelector(state => state.auth_access)
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -30,10 +31,7 @@ const Login = (props) => {
         "username": formControl.username.value,
         "password": formControl.password.value
       }
-      // call API login url.
       dispatch(loginRequest(data));
-    }else{
-      // The form is invalid
     }
   }
 
@@ -43,6 +41,7 @@ const Login = (props) => {
 
   return (
     <Container>
+      { auth_access && <Redirect to="/private"/>}
       <Row style={{marginTop: 20}}>
         <Form onSubmit={onSubmit}>
           <FormGroup>
