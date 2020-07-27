@@ -17,7 +17,7 @@ export default () => {
       <PublicRoute path="/login" component={Login} noAuth/>
       <PublicRoute path="/forgot" component={Forgot} noAuth/>
       <PublicRoute path="/register" component={Register} noAuth/>
-      <PublicRoute path="/reset" component={Reset} noAuth/>
+      <PublicRoute path="/auth/reset/:uid/:token/" component={Reset} noAuth/>
       <PublicRoute path="/public" component={Public} />
 
       <PrivateRoute path="/private" component={Private} />

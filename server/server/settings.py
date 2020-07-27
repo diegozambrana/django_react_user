@@ -70,7 +70,9 @@ ROOT_URLCONF = 'server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, "templates"),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -158,3 +160,26 @@ SIMPLE_JWT = {
 # CORS
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# SMTP
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'contact.diegozambrana.mailer@gmail.com'
+EMAIL_HOST_PASSWORD = '.2iw6db*!hola'
+# EMAIL_HOST_USER = 'dj.react.auth.453627@gmail.com' # 'testcode.bo@gmail.com'
+# EMAIL_HOST_PASSWORD = 'rqUaebjRs4dn' # 'testcode.bo.' # ''
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+ADMIN_EMAIL_ADDRESS = EMAIL_HOST_USER
+
+CODE_INFO = {
+    'Name': 'diegozambrana',
+    'Email': 'contacto@diegozambrana.com',
+    'Address': 'Ayopalla y Villar',
+    'City': 'Cocabamba',
+    'State': 'Cercado',
+    'Zip': '591'
+}
