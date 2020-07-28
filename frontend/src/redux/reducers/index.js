@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 const initialState = {
   test: '',
   loginData: {} = {},
+  loginRequestFail: '',
   auth_access: Cookies.get('auth_access'),
   auth_refresh: Cookies.get('auth_refresh'),
   passwordResetRequestMessage: '',
@@ -20,6 +21,12 @@ export default function(state = initialState, action) {
         ...state,
         auth_access: action.payload.data.access,
         auth_refresh: action.payload.data.refresh,
+      };
+    }
+    case ACTIONS.LOGIN_REQUEST_FAIL: {
+      return {
+        ...state,
+        loginRequestFail: action.payload.detail,
       };
     }
     case ACTIONS.LOGOUT: {

@@ -4,6 +4,7 @@ import {
   Row,
   Form,
   FormGroup,
+  FormText,
   Input
 } from 'reactstrap';
 import { validateForm, validateFormField } from '../../utils';
@@ -13,10 +14,12 @@ import passwordResetRequest from '../../actions/auth/passwordResetRequest'
 
 const Forgot = (props) => {
   let [formControl, setFormControl] = useState(forgot_fields);
+  let [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const successMessage = useSelector(state => state.passwordResetRequestMessage);
 
   const onSubmit = (event) => {
+    setLoading(true);
     event.preventDefault();
 
     // check if all fields of form are valid
@@ -61,6 +64,7 @@ const Forgot = (props) => {
                 id="reset_button"
                 value="Submit"
               />
+              { loading && <FormText color="muted">...loading</FormText>}
             </FormGroup>
           </Form>
         }

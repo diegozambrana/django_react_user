@@ -18,7 +18,7 @@ const Login = (props) => {
 
   let [formControl, setFormControl] = useState(login_fields);
   const dispatch = useDispatch();
-  const auth_access = useSelector(state => state.auth_access)
+  const {auth_access, loginRequestFail} = useSelector(s => s);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -42,6 +42,11 @@ const Login = (props) => {
   return (
     <Container>
       { auth_access && <Redirect to="/private"/>}
+      { loginRequestFail &&
+        <Row>
+          <p>{loginRequestFail}</p>
+        </Row>
+      }
       <Row style={{marginTop: 20}}>
         <Form onSubmit={onSubmit}>
           <FormGroup>
