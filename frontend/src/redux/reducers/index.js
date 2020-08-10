@@ -11,7 +11,9 @@ const initialState = {
   passwordResetMessage: '',
   passwordResetMessageErrors: {} = {},
   passwordResetCheckMessage: {} = {},
-
+  registerSuccess: '',
+  registerDataError: {} = {},
+  registerRequestFail: false,
 };
 
 export default function(state = initialState, action) {
@@ -61,6 +63,21 @@ export default function(state = initialState, action) {
           status: action.payload.status,
           message: action.payload.passwordResetCheck
         }
+      }
+    }
+    case ACTIONS.REGISTER_ACCOUNT_REQUEST: {
+      return {
+        ...state,
+        auth_access: action.payload.data.access,
+        auth_refresh: action.payload.data.refresh,
+        registerSuccess: action.payload.data.success
+      }
+    }
+    case ACTIONS.REGISTER_ACCOUNT_REQUEST_FAIL: {
+      return {
+        ...state,
+        registerDataError: action.payload.data,
+        registerRequestFail: true
       }
     }
     default:
