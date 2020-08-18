@@ -4,6 +4,7 @@ import Reset from './reset';
 import Forgot from './forgot';
 import Private from './private';
 import Public from './public';
+import BasePage from './basePage';
 
 export {
   Login,
@@ -12,4 +13,5 @@ export {
   Forgot,
   Private,
   Public,
+  BasePage,
 }

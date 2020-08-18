@@ -9,11 +9,13 @@ import {
   Forgot,
   Private,
   Public,
+  BasePage,
 } from './components/pages';
 
 export default () => {
   return (
     <Switch>
+      <PublicRoute exact path="/" component={BasePage} />
       <PublicRoute path="/login" component={Login} noAuth/>
       <PublicRoute path="/forgot" component={Forgot} noAuth/>
       <PublicRoute path="/register" component={Register} noAuth/>
