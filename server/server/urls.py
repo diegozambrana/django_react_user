@@ -15,10 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from server.views import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('authentication.urls')),
     path('api/auth/', include('cbauth.urls.api'), name="cbauth_api"),
+
+    # Frontend pages
+    path('', IndexView.as_view()),
+    path('login/', IndexView.as_view()),
+    path('register/', IndexView.as_view()),
+    path('forgot/', IndexView.as_view()),
+    path('public/', IndexView.as_view()),
+    path('private/', IndexView.as_view()),
+    path('auth/reset/<str:id>/<str:uuid>/', IndexView.as_view()),
 ]
